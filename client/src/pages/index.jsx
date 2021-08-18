@@ -24,7 +24,7 @@ export default class IndexPage extends React.Component {
   render() {
     return (
       <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-        <h1 className="mb-4 text-green-500 text-3xl">サンプル</h1>
+        <h1 className="mb-4 text-green-500 text-3xl">sample</h1>
         <p className="mb-2 text-center"> uuuum </p>
         <button className="btn-blue">Let's Start!!</button>
       </section>
