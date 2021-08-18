@@ -4,6 +4,8 @@ import { eth } from '../../web3/provider'
 
 export default class IndexPage extends React.Component {
 
+
+
   async Metamask() {
     try {
       await ethereum.enable() // Prompt user to let our DApp access their addresses
