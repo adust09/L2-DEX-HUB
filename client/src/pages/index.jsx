@@ -17,7 +17,6 @@ export default class IndexPage extends React.Component {
     } catch (err) {
       console.error("User denied access to their ETH addresses!")
     }
-
   }
 
   render() {

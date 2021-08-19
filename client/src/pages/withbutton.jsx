@@ -7,12 +7,17 @@ export default function OutsideUsageExample() {
 
     const withdrawETH = async () => {
         const syncProvider = await zksync.getDefaultProvider("ropsten");
+        console.log("syncProvider=",syncProvider)
+
         const ethersProvider = ethers.getDefaultProvider("ropsten");
+        console.log("ethersProvider=" ,ethersProvider)
 
         // const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
         const ethWallet = ethers.Wallet.createRandom().connect(ethersProvider);
+        console.log("ethWalletAddress=",ethWallet.address);
 
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
+        console.log("syncWalletAddress=", syncWallet.address);
 
         withdraw =
             await
@@ -24,7 +29,6 @@ export default function OutsideUsageExample() {
                 await withdraw.awaitVerifyReceipt();
                 console.log(withdraw.txHash);
     }
-
 
     return (
         <div>
