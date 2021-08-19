@@ -19,15 +19,15 @@ export default function OutsideUsageExample() {
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
         console.log("syncWalletAddress=", syncWallet.address);
 
-        withdraw =
+        const withdraw =
             await
                 syncWallet.withdrawFromSyncToEthereum({
                     ethAddress: ethWallet.ethAddress,
                     token: "ETH",
                     amount: ethers.utils.parseEther("0.998"),
                 });
+                console.log("withdraw.txHash=",withdraw.txHash);
                 await withdraw.awaitVerifyReceipt();
-                console.log(withdraw.txHash);
     }
 
     return (
