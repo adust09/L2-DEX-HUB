@@ -1,6 +1,5 @@
 import React from 'react'
-import { eth } from '../../web3/provider'
-import withdrawButton from '../pages/components/zkSync/withdraw'
+import { eth } from '../web3/provider'
 
 export default class IndexPage extends React.Component {
 

@@ -5,7 +5,6 @@ import * as zksync from "zksync";
 export default function OutsideUsageExample() {
     const MNEMONIC = ""
 
-
     const withdrawETH = async () => {
 
         const syncProvider = await zksync.getDefaultProvider("ropsten");
