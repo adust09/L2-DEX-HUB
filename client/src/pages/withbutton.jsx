@@ -3,18 +3,18 @@ import * as zksync from "zksync";
 
 
 export default function OutsideUsageExample() {
-    const MNEMONIC = process.env.MNEMONIC
+    const MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise"
 
 
     const withdrawETH = async () => {
+
         const syncProvider = await zksync.getDefaultProvider("ropsten");
         console.log("syncProvider=", syncProvider)
 
         const ethersProvider = ethers.getDefaultProvider("ropsten");
         console.log("ethersProvider=", ethersProvider)
 
-        // const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
-        const ethWallet = ethers.Wallet.createRandom().connect(ethersProvider);
+        const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
         console.log("ethWalletAddress=", ethWallet.address);
 
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
@@ -25,14 +25,18 @@ export default function OutsideUsageExample() {
                 syncWallet.withdrawFromSyncToEthereum({
                     ethAddress: ethWallet.address,
                     token: "ETH",
-                    amount: ethers.utils.parseEther("0.998"),
+                    amount: ethers.utils.parseEther("0.001"),
                 });
+
+
         console.log("withdraw.txHash=", withdraw.txHash);
-        await withdraw.awaitVerifyReceipt();
+        console.log({ withdraw });
+
+        console.log(await withdraw.awaitReceipt());
+        console.log(await withdraw.awaitVerifyReceipt());
     }
 
     return (
-
         <div>
             <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
                 <h1 className="mb-4 text-green-500 text-3xl">sample</h1>
