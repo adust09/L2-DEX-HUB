@@ -3,7 +3,7 @@ import * as zksync from "zksync";
 
 
 export default function OutsideUsageExample() {
-    const MNEMONIC = ""
+    const MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise"
 
     const withdrawETH = async () => {
 

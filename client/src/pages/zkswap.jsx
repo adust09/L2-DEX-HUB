@@ -1,6 +1,6 @@
 import { Wallet, Contract, utils } from 'ethers'
 import Web3 from 'web3'
-import zkswapABI from '../src/zkswap.ABI.json'
+import zkswapABI from '../zkswap.ABI.json'
 const Web3EthAbi = require('web3-eth-abi');
 
 
