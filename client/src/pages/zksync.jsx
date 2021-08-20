@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import * as zksync from "zksync";
+import Layout from '../pages/components/Layout'
 
 
 export default function OutsideUsageExample() {
@@ -36,12 +37,15 @@ export default function OutsideUsageExample() {
     }
 
     return (
-        <div>
-            <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-                <h1 className="mb-4 text-green-500 text-3xl">sample</h1>
-                <p className="mb-2 text-center"> zkSync </p>
-                <button className="btn-blue" onClick={withdrawETH}> withdraw ETH</button>
-            </section>
-        </div>
+        <><Layout>
+        </Layout><>
+                <div>
+                    <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
+                        <h1 className="mb-4 text-green-500 text-3xl">sample</h1>
+                        <button className="btn-blue" onClick={withdrawETH}> withdraw ETH</button>
+                    </section>
+                </div>
+            </></>
+
     )
 }
