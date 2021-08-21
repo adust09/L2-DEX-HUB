@@ -1,33 +1,41 @@
-import { Wallet, Contract, utils } from 'ethers'
+import { Wallet, Contract, utils, ethers } from 'ethers'
 import Web3 from 'web3'
 import zkswapABI from '../zkswap.ABI.json'
 const Web3EthAbi = require('web3-eth-abi');
-
+import Layout from '../pages/components/Layout'
+import MNEMONIC from '../zkswap.ABI.json'
 
 export default function zkswap() {
 
-    //try2
-    let ABI = zkswapABI
+    let ABI = zkswapABI;
 
-    const wallet = new Wallet('0x1c1a49fea9a4ede1dc8e582639f498d41fa3c4a9e2ab2b9d740a4a3ec14e1cbf')
+    //normal
+    const wallet = new Wallet('0x2D1Ac1CA744da293c5AcceAe25BE8DCd71168241')
     const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, wallet)
 
+    // fixed
+    // const MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise"
+    // const ethersProvider = ethers.getDefaultProvider("ropsten");
+    // const wallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
+    // const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, wallet)
+
+
     async function depositETH(amount) {
-        const tx = await contract.depositETH(wallet.address, {
-            value: utils.parse(amount)
+        const tx = await contract.depositETH(Wallet, {
+            value: utils.parseEther(amount)
         })
         return tx
     }
 
-    depositETH('0.5').then(console.log)
-
     return (
-        <div>
-            <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-                <h1 className="mb-4 text-green-500 text-3xl">sample</h1>
-                <p className="mb-2 text-center"> ZKSwap </p>
-                <button className="btn-blue" onClick={depositETH}> Deposit ETH</button>
-            </section>
-        </div>
+        <><Layout>
+        </Layout><>
+                <div>
+                    <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
+                        <h1 className="mb-4 text-green-500 text-3xl">sample</h1>
+                        <button className="btn-blue" onClick={depositETH('0.5')}> Deposit ETH</button>
+                    </section>
+                </div>
+            </></>
     )
 }
