@@ -3,8 +3,6 @@ import Web3 from 'web3'
 import zkswapABI from '../zkswap.ABI.json'
 const Web3EthAbi = require('web3-eth-abi');
 import Layout from '../pages/components/Layout'
-import MNEMONIC from '../zkswap.ABI.json'
-
 
 export default function zkswap() {
 
