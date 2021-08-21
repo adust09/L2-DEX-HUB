@@ -1,10 +1,11 @@
 import { ethers } from "ethers";
 import * as zksync from "zksync";
 import Layout from '../pages/components/Layout'
+import MNEMONIC from '../zkswap.ABI.json'
 
 
 export default function OutsideUsageExample() {
-    const MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise"
+    const MNEMONIC = process.env.MNEMONIC;
 
     const withdrawETH = async () => {
 
