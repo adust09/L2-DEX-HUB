@@ -13,7 +13,7 @@ export default function OutsideUsageExample() {
   const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
   console.log("💰:ethWalletAddress = ", ethWallet.address);
 
-  const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, ethWallet)
+  const contract = new Contract('0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467', ABI, ethWallet)
   console.log("📃:contractAddress = ", contract.address);
 
   const withdrawETH = async () => {
@@ -38,11 +38,9 @@ export default function OutsideUsageExample() {
 
   async function depositETH() {
     const tx = await contract.depositETH(ethWallet.address, {
-      value: utils.parseEther('0.05')
+      value: utils.parseEther('0.1')
     })
     console.log("tx=", tx);
-    console.log("--------------------------------");
-
     return tx
   }
 
