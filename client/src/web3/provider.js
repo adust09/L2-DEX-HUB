@@ -1,4 +1,4 @@
-import Web3 from "web3"
+import web3 from "web3"
 
 const provider = () => {
   // If the user has MetaMask:
@@ -9,4 +9,4 @@ const provider = () => {
   }
 }
 
-export const eth = new Web3(provider()).eth
+export const eth = new web3(provider()).eth

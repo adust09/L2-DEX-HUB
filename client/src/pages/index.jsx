@@ -4,21 +4,22 @@ import { Wallet, Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
 
 export default function OutsideUsageExample() {
-  const MNEMONIC = process.env.MNEMONIC;
+  const MNEMONIC = 'potato response theme height bundle toy mushroom squeeze circle name obvious cruise';
+  let ABI = zkswapABI;
+
+  const ethersProvider = ethers.getDefaultProvider("ropsten");
+  console.log("📡:ethersProvider = ", ethersProvider)
+
+  const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
+  console.log("💰:ethWalletAddress = ", ethWallet.address);
+
+  const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, ethWallet)
+  console.log("📃:contractAddress = ", contract.address);
 
   const withdrawETH = async () => {
 
     const syncProvider = await zksync.getDefaultProvider("ropsten");
-    console.log("syncProvider=", syncProvider)
-
-    const ethersProvider = ethers.getDefaultProvider("ropsten");
-    console.log("ethersProvider=", ethersProvider)
-
-    const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
-    console.log("ethWalletAddress=", ethWallet.address);
-
     const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
-    console.log("syncWalletAddress=", syncWallet.address);
 
     const withdraw =
       await
@@ -28,33 +29,22 @@ export default function OutsideUsageExample() {
           amount: ethers.utils.parseEther("0.001"),
         });
 
-
-    console.log("withdraw.txHash=", withdraw.txHash);
-    console.log({ withdraw });
+    console.log("withdraw=", withdraw);
 
     console.log(await withdraw.awaitReceipt());
     console.log(await withdraw.awaitVerifyReceipt());
   }
 
 
-  let ABI = zkswapABI;
+  async function depositETH() {
+    const tx = await contract.depositETH(ethWallet.address, {
+      value: utils.parseEther('0.05')
+    })
+    console.log("tx=", tx);
+    console.log("--------------------------------");
 
-  //normal
-  const wallet = new Wallet('0x2D1Ac1CA744da293c5AcceAe25BE8DCd71168241')
-  const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, wallet)
-
-  // fixed
-  // const MNEMONIC = process.env.MNEMONIC;
-  // const ethersProvider = ethers.getDefaultProvider("ropsten");
-  // const wallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
-  // const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, wallet)
-
-  // async function depositETH(amount) {
-  //   const tx = await contract.depositETH(Wallet, {
-  //     value: utils.parseEther(amount)
-  //   })
-  //   return tx
-  // }
+    return tx
+  }
 
   return (
     <><Layout>
@@ -65,8 +55,7 @@ export default function OutsideUsageExample() {
             <button className="btn-blue" onClick={withdrawETH}> withdraw ETH</button>
 
             <h1 className="mb-4 text-green-500 text-3xl">ZKSwap</h1>
-            {/* <button className="btn-blue" onClick={depositETH('0.5')}> Deposit ETH</button> */}
-            <button className="btn-blue" onClick={console.log("yap")}> Deposit ETH</button>
+            <button className="btn-blue" onClick={depositETH}> Deposit ETH</button>
           </section>
         </div>
       </></>
