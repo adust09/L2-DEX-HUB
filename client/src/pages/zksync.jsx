@@ -46,6 +46,5 @@ export default function OutsideUsageExample() {
                     </section>
                 </div>
             </></>
-
     )
 }
