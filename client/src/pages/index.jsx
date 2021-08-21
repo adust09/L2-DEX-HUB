@@ -4,7 +4,7 @@ import { Wallet, Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
 
 export default function OutsideUsageExample() {
-  const MNEMONIC = 'potato response theme height bundle toy mushroom squeeze circle name obvious cruise';
+  const MNEMONIC = '';
   let ABI = zkswapABI;
 
   const ethersProvider = ethers.getDefaultProvider("ropsten");
