@@ -14,7 +14,7 @@ export default function zkswap() {
     const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, wallet)
 
     // fixed
-    // const MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise"
+    // const MNEMONIC = process.env.MNEMONIC;
     // const ethersProvider = ethers.getDefaultProvider("ropsten");
     // const wallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
     // const contract = new Contract('0x8ECa806Aecc86CE90Da803b080Ca4E3A9b8097ad', ABI, wallet)
