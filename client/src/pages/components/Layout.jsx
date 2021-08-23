@@ -1,4 +1,27 @@
+const { ethers } = require("ethers");
+
 export default function Layout({ children }) {
+
+    const connectWallet = async () => {
+        try {
+            const newAccounts = await ethereum.request({
+                method: 'eth_requestAccounts',
+            })
+            let accounts = newAccounts;
+            console.log(accounts);
+
+            //provider(Metamask)を設定
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            console.log(provider);
+            //signerの設定
+            const signer = provider.getSigner(0);
+            console.log(signer);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
@@ -12,9 +35,10 @@ export default function Layout({ children }) {
                         <span className="ml-3 text-xl">L2 DEX HUB</span>
                     </a>
                     <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-                        <a href="https://www.buymeacoffee.com/pazlydev" className="bg-indigo-700 hover:bg-indigo-500 text-white ml-4 py-2 px-3 rounded-lg">
+                        <button className="btn-blue" onClick={connectWallet}>
                             Connect Wallet
-                        </a>
+                        </button>
+
                     </div>
                 </div>
             </header>
