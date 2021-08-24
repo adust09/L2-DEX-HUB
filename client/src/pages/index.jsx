@@ -4,7 +4,7 @@ import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
 
 export default function OutsideUsageExample() {
-  const MNEMONIC = '';
+  const MNEMONIC = 'potato response theme height bundle toy mushroom squeeze circle name obvious cruise';
   let ABI = zkswapABI;
 
   const ethersProvider = ethers.getDefaultProvider("ropsten");
@@ -50,14 +50,19 @@ export default function OutsideUsageExample() {
   }
 
 
-
   return (
     <><Layout>
     </Layout><>
         <div>
           <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-            <h1 className="mb-4 text-green-500 text-3xl">zkSync → ZKSwap</h1>
-            <button className="btn-blue" onClick={zkSyncToZKSwap}>exchange</button>
+            {/* <h1 className="mb-4 text-green-500 text-3xl">zkSync → ZKSwap</h1>
+            <button className="btn-blue" onClick={zkSyncToZKSwap}>exchange</button> */}
+            <form>
+              <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
+                <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" type="text" name="amount" placeholder="Amount" />
+                <button className="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600" onClick={zkSyncToZKSwap}>Exchange</button>
+              </div>
+            </form>
           </section>
         </div>
       </></>
