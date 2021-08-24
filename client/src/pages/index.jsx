@@ -10,7 +10,7 @@ export default function OutsideUsageExample() {
   // const ethersProvider = ethers.getDefaultProvider("ropsten");
   // const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
-  // const withdrawETH = async () => {
+  // async function withdrawETH()  {
 
   //   const syncProvider = await zksync.getDefaultProvider("ropsten");
   //   const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);

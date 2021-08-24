@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { ethers } from 'ethers';
 
-const ConnectWallet = (props) => {
+export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("connect");
     console.log(Accounts);
 
-    const ConnectMetamask = async () => {
+    async function ConnectMetamask() {
         console.log("2", Accounts);
 
         try {
@@ -14,7 +14,7 @@ const ConnectWallet = (props) => {
             })
 
             let accounts = newAccounts;
-            setAccounts({accounts})
+            setAccounts({ accounts })
             console.log(accounts);
             console.log("3", Accounts);
 
@@ -36,5 +36,3 @@ const ConnectWallet = (props) => {
         </div>
     );
 };
-
-export default ConnectWallet;
