@@ -1,4 +1,3 @@
-const { ethers } = require("ethers");
 import React from "react";
 import ConnectWallet from "./ConnectWallet";
 
