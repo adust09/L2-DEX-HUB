@@ -6,26 +6,9 @@ import * as zksync from "zksync"
 
 export default function OutsideUsageExample() {
 
-  var MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise";
+  var MNEMONIC = "";
   const ethersProvider = ethers.getDefaultProvider("ropsten");
   const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
-
-  // const connectWallet = async () => {
-  //   try {
-  //     const newAccounts = await ethereum.request({
-  //       method: 'eth_requestAccounts',
-  //     })
-  //     const accounts = newAccounts;
-  //     console.log(accounts);
-
-  //     const provider = new ethers.providers.Web3Provider(ethereum);
-  //     const signer = provider.getSigner(0);
-
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
 
   const withdrawETH = async () => {
 

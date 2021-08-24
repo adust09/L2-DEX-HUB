@@ -1,7 +1,7 @@
 const ConnectMetamaskButton = (props) => {
     return (
-        <button onClick = {() => props.onClick()}>
-            {props.Accounts.isMetamaskInstalled ? 'Connect Metamask' : 'Install Metamask'}
+        <button className="btn-blue" onClick={() => props.onClick()}>
+            address:{props.Accounts}
         </button>
     );
 }

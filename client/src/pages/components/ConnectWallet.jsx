@@ -1,17 +1,23 @@
-import { useState } from 'react';
-import { ConnectMetamaskButton } from './ConnectMetamaskButton'
+import { useState } from "react";
+import { ethers } from 'ethers';
 
-const Article = (props) => {
-    const [Accounts, setAccounts] = useState('connect');
-    const publishArticle = async () => {
+const ConnectWallet = (props) => {
+    const [Accounts, setAccounts] = useState("connect");
+    console.log(Accounts);
+
+    const ConnectMetamask = async () => {
+        console.log("2", Accounts);
 
         try {
             const newAccounts = await ethereum.request({
                 method: 'eth_requestAccounts',
             })
 
-            Accounts = newAccounts;
+            let accounts = newAccounts;
+            setAccounts({accounts})
             console.log(accounts);
+            console.log("3", Accounts);
+
 
             const provider = new ethers.providers.Web3Provider(ethereum);
             console.log(provider);
@@ -23,12 +29,12 @@ const Article = (props) => {
             console.error(error);
         }
     };
-    setAccounts(Accounts)
 
     return (
         <div>
-            <ConnectMetamaskButton Accounts={Accounts} onClick={publishArticle} />
+            <button onClick={() => { ConnectMetamask }}>wallet</button>
         </div>
     );
 };
-export default Article;
+
+export default ConnectWallet;
