@@ -1,6 +1,6 @@
 import * as zksync from "zksync";
 import Layout from '../pages/components/Layout'
-import { Wallet, Contract, utils, ethers } from 'ethers'
+import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
 
 export default function OutsideUsageExample() {
@@ -16,7 +16,7 @@ export default function OutsideUsageExample() {
   const contract = new Contract('0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467', ABI, ethWallet)
   console.log("📃:contractAddress = ", contract.address);
 
-  const withdrawETH = async () => {
+  async function withdrawETH() {
 
     const syncProvider = await zksync.getDefaultProvider("ropsten");
     const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
@@ -44,16 +44,20 @@ export default function OutsideUsageExample() {
     return tx
   }
 
+  async function zkSyncToZKSwap() {
+    withdrawETH();
+    depositETH();
+  }
+
+
+
   return (
     <><Layout>
     </Layout><>
         <div>
           <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-            <h1 className="mb-4 text-green-500 text-3xl">zkSync</h1>
-            <button className="btn-blue" onClick={withdrawETH}> withdraw ETH</button>
-
-            <h1 className="mb-4 text-green-500 text-3xl">ZKSwap</h1>
-            <button className="btn-blue" onClick={depositETH}> Deposit ETH</button>
+            <h1 className="mb-4 text-green-500 text-3xl">zkSync → ZKSwap</h1>
+            <button className="btn-blue" onClick={zkSyncToZKSwap}>exchange</button>
           </section>
         </div>
       </></>
