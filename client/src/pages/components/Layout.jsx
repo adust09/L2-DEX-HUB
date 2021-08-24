@@ -1,16 +1,27 @@
 const { ethers } = require("ethers");
+import React, { useState, useEffect } from "react";
 
 export default function Layout({ children }) {
 
+
     const connectWallet = async () => {
+
         try {
             const newAccounts = await ethereum.request({
                 method: 'eth_requestAccounts',
             })
+
+            const [account, setAccounts] = useState('connect account')
+            console.log(account)
+
+            setAccounts(newAccounts)
+            console.log(account)
+
             let accounts = newAccounts;
             console.log(accounts);
 
-            //provider(Metamask)を設定
+
+            // provider(Metamask)を設定
             const provider = new ethers.providers.Web3Provider(ethereum);
             console.log(provider);
             //signerの設定
@@ -36,9 +47,8 @@ export default function Layout({ children }) {
                     </a>
                     <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
                         <button className="btn-blue" onClick={connectWallet}>
-                            Connect Wallet
+                            0x2D...
                         </button>
-
                     </div>
                 </div>
             </header>

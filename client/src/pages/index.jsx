@@ -2,8 +2,6 @@ import Layout from '../pages/components/Layout'
 import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
 import * as zksync from "zksync"
-import Web3 from "web3"
-import Wallet from './components/wallet'
 
 
 export default function OutsideUsageExample() {
@@ -12,21 +10,21 @@ export default function OutsideUsageExample() {
   const ethersProvider = ethers.getDefaultProvider("ropsten");
   const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
-  const connectWallet = async () => {
-    try {
-      const newAccounts = await ethereum.request({
-        method: 'eth_requestAccounts',
-      })
-      const accounts = newAccounts;
-      console.log(accounts);
+  // const connectWallet = async () => {
+  //   try {
+  //     const newAccounts = await ethereum.request({
+  //       method: 'eth_requestAccounts',
+  //     })
+  //     const accounts = newAccounts;
+  //     console.log(accounts);
 
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      const signer = provider.getSigner(0);
+  //     const provider = new ethers.providers.Web3Provider(ethereum);
+  //     const signer = provider.getSigner(0);
 
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
 
   const withdrawETH = async () => {
