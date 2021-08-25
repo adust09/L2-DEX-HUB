@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ethers } from 'ethers';
+import {ConnectMetamaskButton} from '../components/ConnectMetamaskButton';
 
 export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("connect");
@@ -18,7 +19,6 @@ export default function ConnectWallet(props) {
             console.log("accounts", accounts);
             console.log("3", Accounts.accounts);
 
-
             const provider = new ethers.providers.Web3Provider(ethereum);
             console.log(provider);
 
@@ -32,7 +32,7 @@ export default function ConnectWallet(props) {
 
     return (
         <div>
-            <button onClick={() => { ConnectMetamask(); }}>wallet</button>
+            <ConnectMetamaskButton Accounts = {Accounts} onClick={() => { ConnectMetamask(); }}></ConnectMetamaskButton>
         </div>
     );
 };
