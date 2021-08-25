@@ -2,9 +2,6 @@ import * as zksync from "zksync";
 import Layout from '../pages/components/Layout'
 import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
-import { useState } from 'react'
-
-
 
 export default function OutsideUsageExample() {
   const MNEMONIC = 'potato response theme height bundle toy mushroom squeeze circle name obvious cruise';
@@ -48,13 +45,12 @@ export default function OutsideUsageExample() {
   }
 
   async function zkSyncToZKSwap() {
+    event.preventDefault();
     console.log("hello1");
     console.log("amount = ", event.target.amount.value);
     withdrawETH(amount);
     depositETH(amount);
   }
-
-
 
   return (
     <><Layout>
