@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 
 export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("connect");
-    console.log(Accounts);
+    console.log("1", Accounts);
 
     async function ConnectMetamask() {
         console.log("2", Accounts);
@@ -14,9 +14,9 @@ export default function ConnectWallet(props) {
             })
 
             let accounts = newAccounts;
-            setAccounts({ accounts })
-            console.log(accounts);
-            console.log("3", Accounts);
+            setAccounts({ accounts });
+            console.log("accounts", accounts);
+            console.log("3", Accounts.accounts);
 
 
             const provider = new ethers.providers.Web3Provider(ethereum);
@@ -32,7 +32,7 @@ export default function ConnectWallet(props) {
 
     return (
         <div>
-            <button onClick={() => { ConnectMetamask }}>wallet</button>
+            <button onClick={() => { ConnectMetamask(); }}>wallet</button>
         </div>
     );
 };
