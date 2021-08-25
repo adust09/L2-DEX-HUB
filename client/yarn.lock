@@ -623,6 +623,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/web3@^1.0.19":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@types/web3/-/web3-1.2.2.tgz#d95a101547ce625c5ebd0470baa5dbd4b9f3c015"
+  integrity sha512-eFiYJKggNrOl0nsD+9cMh2MLk4zVBfXfGnVeRFbpiZzBE20eet4KLA3fXcjSuHaBn0RnQzwLAGdgzgzdet4C0A==
+  dependencies:
+    web3 "*"
+
 "@typescript-eslint/parser@^4.20.0":
   version "4.29.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.29.2.tgz#1c7744f4c27aeb74610c955d3dce9250e95c370a"
@@ -752,6 +759,11 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   integrity sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==
   dependencies:
     color-convert "^2.0.1"
+
+ant-design@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ant-design/-/ant-design-1.0.0.tgz#53ea0a397da976358e88bf06224fb3de756b87b4"
+  integrity sha1-U+oKOX2pdjWOiL8GIk+z3nVrh7Q=
 
 anymatch@~3.1.1, anymatch@~3.1.2:
   version "3.1.2"
@@ -5615,6 +5627,14 @@ web3-net@1.5.2:
     web3-core-method "1.5.2"
     web3-utils "1.5.2"
 
+web3-provider@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/web3-provider/-/web3-provider-1.0.0.tgz#f4be8545896b9dbb2aa707df0bdf5af80cd2642e"
+  integrity sha512-dbwX8MbYmeRRSiRaGTq/qEYaWnReEkN1Z2p1+BwxSeFdsntvzxgAOVMfgAFr/iwFVPqYtEHMjkh2shi648c0eA==
+  dependencies:
+    "@types/web3" "^1.0.19"
+    web3 "^1.0.0-beta.55"
+
 web3-providers-http@1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/web3-providers-http/-/web3-providers-http-1.5.2.tgz#94f95fe5572ca54aa2c2ffd42c63956436c9eb0a"
@@ -5663,7 +5683,7 @@ web3-utils@1.5.2:
     randombytes "^2.1.0"
     utf8 "3.0.0"
 
-web3@^1.5.2:
+web3@*, web3@^1.0.0-beta.55, web3@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.5.2.tgz#736ca2f39048c63964203dd811f519400973e78d"
   integrity sha512-aapKLdO8t7Cos6tZLeeQUtCJvTiPMlLcHsHHDLSBZ/VaJEucSTxzun32M8sp3BmF4waDEmhY+iyUM1BKvtAcVQ==
