@@ -1,3 +1,7 @@
+import React from "react";
+import ConnectWallet from "./ConnectWallet";
+
+
 export default function Layout({ children }) {
     return (
         <>
@@ -12,9 +16,7 @@ export default function Layout({ children }) {
                         <span className="ml-3 text-xl">L2 DEX HUB</span>
                     </a>
                     <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-                        <a href="https://www.buymeacoffee.com/pazlydev" className="bg-indigo-700 hover:bg-indigo-500 text-white ml-4 py-2 px-3 rounded-lg">
-                            0x2D...
-                        </a>
+                        <ConnectWallet />
                     </div>
                 </div>
             </header>

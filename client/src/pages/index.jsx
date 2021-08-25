@@ -1,17 +1,17 @@
-import * as zksync from "zksync";
 import Layout from '../pages/components/Layout'
 import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
+import * as zksync from "zksync"
+
 
 export default function OutsideUsageExample() {
-  const MNEMONIC = 'potato response theme height bundle toy mushroom squeeze circle name obvious cruise';
-  let ABI = zkswapABI;
 
+  let ABI = zkswapABI;
+  var MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise";
   const ethersProvider = ethers.getDefaultProvider("ropsten");
 
   const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
-  const contract = new Contract('0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467', ABI, ethWallet)
 
   async function withdrawETH() {
     console.log("hello2");
@@ -26,21 +26,17 @@ export default function OutsideUsageExample() {
           token: "ETH",
           amount: ethers.utils.parseEther("0.001"),
         });
-
-    console.log("withdraw=", withdraw);
-
-    console.log(await withdraw.awaitReceipt());
-    console.log(await withdraw.awaitVerifyReceipt());
   }
 
 
   async function depositETH() {
-    console.log("hello3");
 
+    let ABI = zkswapABI;
+    let ZKSwapContract = '0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467'
+    const contract = new Contract(ZKSwapContract, ABI, ethWallet)
     const tx = await contract.depositETH(ethWallet.address, {
       value: utils.parseEther('0.1')
     })
-    console.log("tx=", tx);
     return tx
   }
 
@@ -56,6 +52,9 @@ export default function OutsideUsageExample() {
     <><Layout>
     </Layout><>
         <div>
+          <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+
+          </div>
           <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
             <form onSubmit={zkSyncToZKSwap}>
               <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
