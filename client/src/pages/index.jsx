@@ -10,7 +10,7 @@ export default function OutsideUsageExample() {
   const ethersProvider = ethers.getDefaultProvider("ropsten");
   const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
-  async function withdrawETH()  {
+  async function withdrawETH() {
 
     const syncProvider = await zksync.getDefaultProvider("ropsten");
     const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
@@ -35,6 +35,13 @@ export default function OutsideUsageExample() {
     return tx
   }
 
+  async function zkSyncToZKSwap() {
+    withdrawETH();
+    depositETH();
+  }
+
+
+
   return (
     <><Layout>
     </Layout><>
@@ -43,11 +50,8 @@ export default function OutsideUsageExample() {
 
           </div>
           <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-            <h1 className="mb-4 text-green-500 text-3xl">zkSync</h1>
-            <button className="btn-blue" onClick={withdrawETH}> withdraw ETH</button>
-
-            <h1 className="mb-4 text-green-500 text-3xl">ZKSwap</h1>
-            <button className="btn-blue" onClick={depositETH}> Deposit ETH</button>
+            <h1 className="mb-4 text-green-500 text-3xl">zkSync → ZKSwap</h1>
+            <button className="btn-blue" onClick={zkSyncToZKSwap}>exchange</button>
           </section>
         </div>
       </></>
