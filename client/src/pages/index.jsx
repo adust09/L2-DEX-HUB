@@ -2,6 +2,7 @@ import Layout from '../pages/components/Layout'
 import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../zkswap.ABI.json'
 import * as zksync from "zksync"
+import ConnectWallet from './components/ConnectWallet'
 
 
 export default function OutsideUsageExample() {
@@ -36,6 +37,9 @@ export default function OutsideUsageExample() {
   }
 
   async function zkSyncToZKSwap() {
+    event.preventDefault();
+    console.log("hello1");
+    console.log("amount = ", event.target.amount.value);
     withdrawETH();
     depositETH();
   }
@@ -46,12 +50,14 @@ export default function OutsideUsageExample() {
     <><Layout>
     </Layout><>
         <div>
-          <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-
-          </div>
           <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-            <h1 className="mb-4 text-green-500 text-3xl">zkSync → ZKSwap</h1>
-            <button className="btn-blue" onClick={zkSyncToZKSwap}>exchange</button>
+            <form onSubmit={zkSyncToZKSwap}>
+              <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
+                <label htmlFor="amount"></label>
+                <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" id="amount" type="text" amount="amount" placeholder="Amount" />
+                <button className="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600" type="submit" >Exchange</button>
+              </div>
+            </form>
           </section>
         </div>
       </></>
