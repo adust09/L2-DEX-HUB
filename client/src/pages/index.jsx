@@ -45,9 +45,13 @@ export default function OutsideUsageExample() {
   }
 
   async function zkSyncToZKSwap() {
+
     withdrawETH();
     depositETH();
   }
+
+  const [amount,setAmount] = useState(0)
+  console.log("amount=", amount)
 
 
   return (
@@ -57,10 +61,13 @@ export default function OutsideUsageExample() {
           <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
             {/* <h1 className="mb-4 text-green-500 text-3xl">zkSync → ZKSwap</h1>
             <button className="btn-blue" onClick={zkSyncToZKSwap}>exchange</button> */}
-            <form>
+            <form onSubmit={zkSyncToZKSwap}>
               <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
-                <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" type="text" name="amount" placeholder="Amount" />
-                <button className="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600" onClick={zkSyncToZKSwap}>Exchange</button>
+                {/* <label htmlFor="amount"></label> */}
+                <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" type="text" amount="amount" placeholder="Amount" />
+                <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" type="text" onChange={(e) => setAmount(e.target.value)} />
+
+                <button className="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600" type="submit" onClick ={setAmount(amount)}>Exchange</button>
               </div>
             </form>
           </section>
