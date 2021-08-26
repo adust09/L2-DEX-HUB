@@ -4,17 +4,13 @@ import { Contract, utils, ethers } from 'ethers'
 import zkswapABI from '../../zkswap.ABI.json'
 import * as zksync from "zksync"
 
-
-
 export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("Connect Metamask");
     const ethersProvider = ethers.getDefaultProvider("ropsten");
 
-    var MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise";
+    var MNEMONIC = process.env.MNEMONIC;
     const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
     console.log("Accounts = ", Accounts);
-
-
 
     async function ConnectMetamask() {
 
@@ -25,11 +21,21 @@ export default function ConnectWallet(props) {
 
             let accounts = newAccounts;
             setAccounts(accounts[0]);
-            console.log("Accounts3 = ", Accounts);
+            console.log("Accounts = ", Accounts);
 
         } catch (error) {
             console.error(error);
         }
+        getBalases();
+    };
+
+    async function getBalases() {
+        const address = Accounts;
+        console.log("address = ", address);
+        const zkSyncUrl = "https://api.zks.app/v2/3/account/0x2D1Ac1CA744da293c5AcceAe25BE8DCd71168241/balances";
+        const response = await fetch(zkSyncUrl);
+        const data = await response.json();
+        console.log("data = ", data);
     };
 
     async function withdrawETH() {
@@ -59,6 +65,7 @@ export default function ConnectWallet(props) {
     async function zkSyncToZKSwap() {
         event.preventDefault();
         console.log("amount = ", event.target.amount.value);
+
         withdrawETH();
         depositETH();
     }
