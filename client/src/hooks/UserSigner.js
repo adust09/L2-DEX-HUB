@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 
 const useUserSigner = (injectedProvider, localProvider) => {
   const [signer, setSigner] = useState();
-
   useMemo(() => {
     if (injectedProvider) {
       console.log("🦊 Using injected provider");
@@ -35,6 +34,5 @@ const useUserSigner = (injectedProvider, localProvider) => {
       }
     }
   }, [injectedProvider, localProvider]);
-
   return signer;
 };
