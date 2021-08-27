@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
     "ant-design": "^1.0.0",
     "ethers": "^5.4.5",
     "js-base64": "^3.6.1",

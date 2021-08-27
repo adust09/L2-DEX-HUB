@@ -3,17 +3,23 @@ import { Contract, utils, ethers } from 'ethers'
 import ConnectMetamaskButton from '../components/ConnectMetamaskButton';
 import zkswapABI from '../../zkswap.ABI.json'
 import * as zksync from "zksync"
+import { useUserSigner } from "../../hooks/UserSigner";
+import detectEthereumProvider from '@metamask/detect-provider';
+
 
 export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("Connect Metamask");
-    const ethersProvider = ethers.getDefaultProvider("ropsten");
-
-    var MNEMONIC = process.env.MNEMONIC;
-    const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
     console.log("Accounts = ", Accounts);
 
-    async function ConnectMetamask() {
+    const ethersProvider = ethers.getDefaultProvider("ropsten");
+    console.log("ethersProvider = ", ethersProvider);
 
+    var MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise";
+    const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
+
+    const [injectedProvider, setInjectedProvider] = useState();
+
+    async function ConnectMetamask() {
         try {
             const newAccounts = await ethereum.request({
                 method: 'eth_requestAccounts',
@@ -27,6 +33,15 @@ export default function ConnectWallet(props) {
             console.error(error);
         }
         getBalases();
+
+        const provider = await detectEthereumProvider();
+        console.log("provider = ", provider);
+
+        setInjectedProvider(new ethers.providers.Web3Provider(provider));
+        console.log("injectedProvider = ", injectedProvider);
+
+        const userSigner = useUserSigner(injectedProvider, ethersProvider);
+        console.log("userSigner = ", userSigner);
     };
 
     async function getBalases() {
@@ -46,7 +61,7 @@ export default function ConnectWallet(props) {
         const withdraw =
             await
                 syncWallet.withdrawFromSyncToEthereum({
-                    ethAddress: ethWallet.address,
+                    ethAddress: Accounts,
                     token: "ETH",
                     amount: ethers.utils.parseEther("0.001"),
                 });
