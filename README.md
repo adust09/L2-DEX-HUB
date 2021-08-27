@@ -5,6 +5,13 @@
 - zkSync SDK
 - ZKSwap SDK
 
+## How to test
+
+```
+$ cd client
+$ yarn dev
+```
+
 ## WIP
  - Integrate ORU DEX
  - Brush up UI
