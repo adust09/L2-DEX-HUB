@@ -19,6 +19,11 @@ export default function ConnectWallet(props) {
 
     const [injectedProvider, setInjectedProvider] = useState();
 
+
+    let ZKSwapABI = zkswapABI;
+    let ZKSwapContract = '0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467'
+    const zkswapContract = new Contract(ZKSwapContract, ZKSwapABI, ethWallet)
+
     async function ConnectMetamask() {
         try {
             const newAccounts = await ethereum.request({
@@ -40,8 +45,8 @@ export default function ConnectWallet(props) {
         setInjectedProvider(new ethers.providers.Web3Provider(provider));
         console.log("injectedProvider = ", injectedProvider);
 
-        const userSigner = useUserSigner(injectedProvider, ethersProvider);
-        console.log("userSigner = ", userSigner);
+        // const userSigner = useUserSigner(injectedProvider, ethersProvider);
+        // console.log("userSigner = ", userSigner);
     };
 
     async function getBalases() {
@@ -53,7 +58,7 @@ export default function ConnectWallet(props) {
         console.log("data = ", data);
     };
 
-    async function withdrawETH() {
+    async function withdrawZkSync() {
 
         const syncProvider = await zksync.getDefaultProvider("ropsten");
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
@@ -67,12 +72,28 @@ export default function ConnectWallet(props) {
                 });
     }
 
-    async function depositETH() {
-        let ABI = zkswapABI;
-        let ZKSwapContract = '0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467'
-        const contract = new Contract(ZKSwapContract, ABI, ethWallet)
-        const tx = await contract.depositETH(ethWallet.address, {
+
+    async function depositZKSwap() {
+        const tx = await zkswapContract.depositETH(Accounts, {
             value: utils.parseEther('0.1')
+        })
+        return tx
+    }
+
+
+    async function depositZkSync() {
+        const syncProvider = await zksync.getDefaultProvider("ropsten");
+        const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
+        const deposit = await syncWallet.depositToSyncFromEthereum({
+            depositTo: Accounts,
+            token: "ETH",
+            amount: ethers.utils.parseEther("0.01"),
+        });
+    }
+
+    async function withdrawZKSwap() {
+        const tx = await zkswapContract.depositETH(Accounts, {
+            value: utils.parseEther("0.1")
         })
         return tx
     }
@@ -81,8 +102,16 @@ export default function ConnectWallet(props) {
         event.preventDefault();
         console.log("amount = ", event.target.amount.value);
 
-        withdrawETH();
-        depositETH();
+        withdrawZkSync();
+        depositZKSwap();
+    }
+
+    async function zkSwapToZKSync() {
+        event.preventDefault();
+        console.log("amount = ", event.target.amount.value);
+
+        withdrawZKSwap();
+        depositZkSync();
     }
 
     return (
@@ -105,7 +134,17 @@ export default function ConnectWallet(props) {
 
             <div>
                 <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
+                zkSyncToZKSwap
                     <form onSubmit={zkSyncToZKSwap}>
+                        <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
+
+                            <label htmlFor="amount"></label>
+                            <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" id="amount" type="text" amount="amount" placeholder="Amount" />
+                            <button className="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600" type="submit" >Exchange</button>
+                        </div>
+                    </form>
+                    zkSwapToZKSync
+                    <form onSubmit={zkSwapToZKSync}>
                         <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
                             <label htmlFor="amount"></label>
                             <input className="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100" id="amount" type="text" amount="amount" placeholder="Amount" />
