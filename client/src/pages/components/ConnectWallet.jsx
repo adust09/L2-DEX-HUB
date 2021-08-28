@@ -73,14 +73,14 @@ export default function ConnectWallet(props) {
                 syncWallet.withdrawFromSyncToEthereum({
                     ethAddress: Accounts,
                     token: "ETH",
-                    amount: ethers.utils.parseEther("0.001"),
+                    amount: ethers.utils.parseEther("0.01"),
                 });
     }
 
 
     async function depositZKSwap() {
         const tx = await zkswapContract.depositETH(Accounts, {
-            value: utils.parseEther('0.1')
+            value: utils.parseEther('0.01')
         })
         return tx
     }
@@ -98,7 +98,7 @@ export default function ConnectWallet(props) {
 
     async function withdrawZKSwap() {
         const tx = await zkswapContract.depositETH(Accounts, {
-            value: utils.parseEther("0.1")
+            value: utils.parseEther("0.01")
         })
         return tx
     }
@@ -149,13 +149,6 @@ export default function ConnectWallet(props) {
                         </div>
                     </form>
                     <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row"></div>
-
-                    <pre>
-
-
-
-
-                    </pre>
                     zkSwap → ZKSync
                     <form onSubmit={zkSwapToZKSync}>
                         <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
