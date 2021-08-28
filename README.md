@@ -2,6 +2,14 @@
 
 <img width="1422" alt="スクリーンショット 2021-08-28 20 59 51" src="https://user-images.githubusercontent.com/47593288/131217124-f199bc37-3e55-4401-bc4b-3f4cb7487c1c.png">
 
+## Supported environments
+### L2
+- ZKSwap
+- zkSync
+### Network
+- Ropsten
+
+
 ## Develop Environment
 - Next.js
 - zkSync SDK
