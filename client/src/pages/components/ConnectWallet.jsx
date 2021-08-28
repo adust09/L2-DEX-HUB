@@ -3,9 +3,8 @@ import { Contract, utils, ethers } from 'ethers'
 import ConnectMetamaskButton from '../components/ConnectMetamaskButton';
 import zkswapABI from '../../zkswap.ABI.json'
 import * as zksync from "zksync"
-import { useUserSigner } from "../../hooks/UserSigner";
-import detectEthereumProvider from '@metamask/detect-provider';
-
+// import useUserSigner from "../../hooks/UserSigner";
+// import detectEthereumProvider from '@metamask/detect-provider';
 
 export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("Connect Metamask");
@@ -17,12 +16,16 @@ export default function ConnectWallet(props) {
     var MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise";
     const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
-    const [injectedProvider, setInjectedProvider] = useState();
+    // const [injectedProvider, setInjectedProvider] = useState();
+    // console.log("injectedProvider = ", injectedProvider);
 
 
     let ZKSwapABI = zkswapABI;
     let ZKSwapContract = '0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467'
     const zkswapContract = new Contract(ZKSwapContract, ZKSwapABI, ethWallet)
+
+    // const userSigner = useUserSigner("cat", ethersProvider);
+    // console.log("userSigner = ", userSigner);
 
     async function ConnectMetamask() {
         try {
@@ -39,15 +42,17 @@ export default function ConnectWallet(props) {
         }
         getBalases();
 
-        const provider = await detectEthereumProvider();
-        console.log("provider = ", provider);
+        // const provider = await detectEthereumProvider();
+        // console.log("provider = ", provider);
 
-        setInjectedProvider(new ethers.providers.Web3Provider(provider));
-        console.log("injectedProvider = ", injectedProvider);
+        // setInjectedProvider(new ethers.providers.Web3Provider(provider));
+        // console.log("injectedProvider = ", injectedProvider);
 
-        // const userSigner = useUserSigner(injectedProvider, ethersProvider);
+        // const userSigner = useUserSigner("cat", ethersProvider);
         // console.log("userSigner = ", userSigner);
     };
+
+
 
     async function getBalases() {
         const address = Accounts;
@@ -134,7 +139,7 @@ export default function ConnectWallet(props) {
 
             <div>
                 <section className="h-screen w-4/5 max-w-5xl mx-auto flex items-center justify-center flex-col">
-                zkSyncToZKSwap
+                    zkSync → ZKSwap
                     <form onSubmit={zkSyncToZKSwap}>
                         <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
 
@@ -143,7 +148,15 @@ export default function ConnectWallet(props) {
                             <button className="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600" type="submit" >Exchange</button>
                         </div>
                     </form>
-                    zkSwapToZKSync
+                    <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row"></div>
+
+                    <pre>
+
+
+
+
+                    </pre>
+                    zkSwap → ZKSync
                     <form onSubmit={zkSwapToZKSync}>
                         <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
                             <label htmlFor="amount"></label>
