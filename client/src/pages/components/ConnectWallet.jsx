@@ -3,8 +3,6 @@ import { Contract, utils, ethers } from 'ethers'
 import ConnectMetamaskButton from '../components/ConnectMetamaskButton';
 import zkswapABI from '../../zkswap.ABI.json'
 import * as zksync from "zksync"
-// import useUserSigner from "../../hooks/UserSigner";
-// import detectEthereumProvider from '@metamask/detect-provider';
 
 export default function ConnectWallet(props) {
     const [Accounts, setAccounts] = useState("Connect Metamask");
@@ -15,17 +13,10 @@ export default function ConnectWallet(props) {
 
     var MNEMONIC = "potato response theme height bundle toy mushroom squeeze circle name obvious cruise";
     const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
-
-    // const [injectedProvider, setInjectedProvider] = useState();
-    // console.log("injectedProvider = ", injectedProvider);
-
-
+ 
     let ZKSwapABI = zkswapABI;
     let ZKSwapContract = '0x010254cd670aCbb632A1c23a26Abe570Ab2Bc467'
     const zkswapContract = new Contract(ZKSwapContract, ZKSwapABI, ethWallet)
-
-    // const userSigner = useUserSigner("cat", ethersProvider);
-    // console.log("userSigner = ", userSigner);
 
     async function ConnectMetamask() {
         try {
@@ -37,32 +28,12 @@ export default function ConnectWallet(props) {
             setAccounts(accounts[0]);
             console.log("Accounts = ", Accounts);
 
+
         } catch (error) {
             console.error(error);
         }
-        getBalases();
-
-        // const provider = await detectEthereumProvider();
-        // console.log("provider = ", provider);
-
-        // setInjectedProvider(new ethers.providers.Web3Provider(provider));
-        // console.log("injectedProvider = ", injectedProvider);
-
-        // const userSigner = useUserSigner("cat", ethersProvider);
-        // console.log("userSigner = ", userSigner);
     };
-
-
-
-    async function getBalases() {
-        const address = Accounts;
-        console.log("address = ", address);
-        const zkSyncUrl = "https://api.zks.app/v2/3/account/0x2D1Ac1CA744da293c5AcceAe25BE8DCd71168241/balances";
-        const response = await fetch(zkSyncUrl);
-        const data = await response.json();
-        console.log("data = ", data);
-    };
-
+  
     async function withdrawZkSync() {
 
         const syncProvider = await zksync.getDefaultProvider("ropsten");
