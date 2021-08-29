@@ -11,7 +11,8 @@ export default function ConnectWallet(props) {
     const ethersProvider = ethers.getDefaultProvider("ropsten");
     console.log("ethersProvider = ", ethersProvider);
 
-    var MNEMONIC = process.env.MNEMONIC;
+    var MNEMONIC = "";
+
     const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
     let ZKSwapABI = zkswapABI;
@@ -34,7 +35,24 @@ export default function ConnectWallet(props) {
         }
     };
 
-    async function withdrawZkSync() {
+    async function zkSyncToZKSwap() {
+        event.preventDefault();
+        const amount = event.target.amount.value
+
+        withdrawZkSync(amount);
+        depositZKSwap(amount);
+    }
+
+    async function zkSwapToZKSync() {
+        event.preventDefault();
+        const amount = event.target.amount.value
+
+        withdrawZKSwap(amount);
+        depositZkSync(amount);
+    }
+
+    async function withdrawZkSync(amount) {
+
 
         const syncProvider = await zksync.getDefaultProvider("ropsten");
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
@@ -44,50 +62,34 @@ export default function ConnectWallet(props) {
                 syncWallet.withdrawFromSyncToEthereum({
                     ethAddress: Accounts,
                     token: "ETH",
-                    amount: ethers.utils.parseEther("0.001"),
+                    amount: ethers.utils.parseEther(amount),
                 });
     }
 
 
-    async function depositZKSwap() {
+    async function depositZKSwap(amount) {
         const tx = await zkswapContract.depositETH(Accounts, {
-            value: utils.parseEther('0.1')
+            value: utils.parseEther(amount)
         })
         return tx
     }
 
 
-    async function depositZkSync() {
+    async function depositZkSync(amount) {
         const syncProvider = await zksync.getDefaultProvider("ropsten");
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
         const deposit = await syncWallet.depositToSyncFromEthereum({
             depositTo: Accounts,
             token: "ETH",
-            amount: ethers.utils.parseEther("0.01"),
+            amount: ethers.utils.parseEther(amount),
         });
     }
 
-    async function withdrawZKSwap() {
+    async function withdrawZKSwap(amount) {
         const tx = await zkswapContract.depositETH(Accounts, {
-            value: utils.parseEther("0.1")
+            value: utils.parseEther(amount)
         })
         return tx
-    }
-
-    async function zkSyncToZKSwap() {
-        event.preventDefault();
-        console.log("amount = ", event.target.amount.value);
-
-        withdrawZkSync();
-        depositZKSwap();
-    }
-
-    async function zkSwapToZKSync() {
-        event.preventDefault();
-        console.log("amount = ", event.target.amount.value);
-
-        withdrawZKSwap();
-        depositZkSync();
     }
 
     return (
@@ -120,13 +122,6 @@ export default function ConnectWallet(props) {
                         </div>
                     </form>
                     <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row"></div>
-
-                    <pre>
-
-
-
-
-                    </pre>
                     zkSwap → ZKSync
                     <form onSubmit={zkSwapToZKSync}>
                         <div className="flex flex-col rounded-lg overflow-hidden sm:flex-row">
