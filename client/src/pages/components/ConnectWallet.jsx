@@ -12,6 +12,7 @@ export default function ConnectWallet(props) {
     console.log("ethersProvider = ", ethersProvider);
 
     var MNEMONIC = "";
+
     const ethWallet = ethers.Wallet.fromMnemonic(MNEMONIC).connect(ethersProvider);
 
     let ZKSwapABI = zkswapABI;
@@ -51,6 +52,7 @@ export default function ConnectWallet(props) {
     }
 
     async function withdrawZkSync(amount) {
+
 
         const syncProvider = await zksync.getDefaultProvider("ropsten");
         const syncWallet = await zksync.Wallet.fromEthSigner(ethWallet, syncProvider);
@@ -99,7 +101,7 @@ export default function ConnectWallet(props) {
                     </nav>
                     <a
                         className="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center lg:items-center lg:justify-center mb-4 md:mb-0">
-                        <span className="ml-3 text-xl">L2 DEX HUB</span>
+                        <span className="ml-3 text-xl">L2 DEX Hub</span>
                     </a>
                     <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
                         <ConnectMetamaskButton Accounts={Accounts} onClick={() => { ConnectMetamask(); }}></ConnectMetamaskButton>
